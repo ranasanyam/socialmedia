@@ -2,16 +2,17 @@ import axios from 'axios';
 
 
 export const loginUser = (email, password) => async (dispatch) => {
+
     try {
         dispatch({
             type: "loginRequest"
         });
-        const { data } = await axios.post('/api/v1/login', { email, password }, {
+        const { data } = await axios.post(`${process.env.REACT_APP_URL}/api/v1/login`, { email, password }, {
             headers: {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*"
+                "Content-Type": "application/json"
             }
         });
+        console.log(data);
         dispatch({
             type: "loginSuccess",
             payload: data.user
@@ -28,7 +29,7 @@ export const loadUser = () => async (dispatch) => {
         dispatch({
             type: "loadUserRequest"
         });
-        const { data } = await axios.get('/api/v1/me');
+        const { data } = await axios.get(`${process.env.REACT_APP_URL}/api/v1/me`);
         dispatch({
             type: "loadUserSuccess",
             payload: data.user
@@ -47,7 +48,7 @@ export const getFollowingPosts = () => async (dispatch) => {
             type: "postOfFollowingRequest"
         });
 
-        const { data } = await axios.get('/api/v1/posts');
+        const { data } = await axios.get(`${process.env.REACT_APP_URL}/api/v1/posts`);
 
 
         dispatch({
@@ -69,7 +70,7 @@ export const getAllUsers = (name="") => async (dispatch) => {
             type: "allUsersRequest"
         });
 
-        const { data } = await axios.get(`/api/v1/users?name=${name}`);
+        const { data } = await axios.get(`${process.env.REACT_APP_URL}/api/v1/users?name=${name}`);
 
 
         dispatch({
@@ -90,7 +91,7 @@ export const getMyPosts = () => async (dispatch) => {
             type: "myPostsRequest"
         });
 
-        const { data } = await axios.get('/api/v1/my/posts');
+        const { data } = await axios.get(`${process.env.REACT_APP_URL}/api/v1/my/posts`);
 
 
         dispatch({
@@ -110,7 +111,7 @@ export const logoutUser = () => async (dispatch) => {
         dispatch({
             type: "logoutUserRequest"
         });
-        await axios.get('/api/v1/logout');
+        await axios.get(`${process.env.REACT_APP_URL}/api/v1/logout`);
         dispatch({
             type: "logoutUserSuccess"
         });
@@ -126,7 +127,7 @@ export const registerUser = (name, email, password, avatar) => async (dispatch) 
         dispatch({
             type: "registerRequest"
         });
-        const { data } = await axios.post('/api/v1/register', { name, email, password, avatar }, {
+        const { data } = await axios.post(`${process.env.REACT_APP_URL}/api/v1/register`, { name, email, password, avatar }, {
             headers: {
                 "Content-Type": "application/json",
                 "Access-Control-Allow-Origin": "*"
@@ -148,7 +149,7 @@ export const updateProfile = (name, email, avatar) => async (dispatch) => {
         dispatch({
             type: "updateProfileRequest"
         });
-        const { data } = await axios.put('/api/v1/update/profile', { name, email, avatar }, {
+        const { data } = await axios.put(`${process.env.REACT_APP_URL}/api/v1/update/profile`, { name, email, avatar }, {
             headers: {
                 "Content-Type": "application/json",
                 "Access-Control-Allow-Origin": "*"
@@ -170,7 +171,7 @@ export const updatePassword = (oldPassword, newPassword) => async (dispatch) => 
         dispatch({
             type: "updatePasswordRequest"
         });
-        const { data } = await axios.put('/api/v1/update/password', { oldPassword, newPassword }, {
+        const { data } = await axios.put(`${process.env.REACT_APP_URL}/api/v1/update/password`, { oldPassword, newPassword }, {
             headers: {
                 "Content-Type": "application/json",
                 "Access-Control-Allow-Origin": "*"
@@ -192,7 +193,7 @@ export const deleteMyProfile = () => async (dispatch) => {
         dispatch({
             type: "deleteProfileRequest"
         });
-        const { data } = await axios.delete('/api/v1/delete/me');
+        const { data } = await axios.delete(`${process.env.REACT_APP_URL}/api/v1/delete/me`);
         dispatch({
             type: "deleteProfileSuccess",
             payload: data.message
@@ -210,7 +211,7 @@ export const forgotPassword = (email) => async (dispatch) => {
         dispatch({
             type: "forgotPasswordRequest"
         });
-        const { data } = await axios.post('/api/v1/forgot/password', {
+        const { data } = await axios.post(`${process.env.REACT_APP_URL}/api/v1/forgot/password`, {
             email
         },{
             headers: {
@@ -234,7 +235,7 @@ export const resetPassword = (token, password) => async (dispatch) => {
         dispatch({
             type: "resetPasswordRequest"
         });
-        const { data } = await axios.put(`/api/v1/password/token/${token}`, {
+        const { data } = await axios.put(`${process.env.REACT_APP_URL}/api/v1/password/token/${token}`, {
             password
         },{
             headers: {
@@ -259,7 +260,7 @@ export const getUserPosts = (id) => async (dispatch) => {
             type: "userPostsRequest"
         });
 
-        const { data } = await axios.get(`/api/v1/userposts/${id}`);
+        const { data } = await axios.get(`${process.env.REACT_APP_URL}/api/v1/userposts/${id}`);
 
 
         dispatch({
@@ -281,7 +282,7 @@ export const getUserProfile = (id) => async (dispatch) => {
             type: "userProfileRequest"
         });
 
-        const { data } = await axios.get(`/api/v1/user/${id}`);
+        const { data } = await axios.get(`${process.env.REACT_APP_URL}/api/v1/user/${id}`);
 
 
         dispatch({
@@ -302,7 +303,7 @@ export const followAndUnfollowUser = (id) => async (dispatch) => {
             type: "followUserRequest"
         });
 
-        const { data } = await axios.get(`/api/v1/follow/${id}`);
+        const { data } = await axios.get(`${process.env.REACT_APP_URL}/api/v1/follow/${id}`);
 
 
         dispatch({

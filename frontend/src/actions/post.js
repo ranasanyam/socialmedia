@@ -7,7 +7,7 @@ export const likePost = (id) => async (dispatch) => {
             type: 'likeRequest'
         });
 
-        const { data } = await axios.get(`/api/v1/post/${id}`);
+        const { data } = await axios.get(`${process.env.REACT_APP_URL}/api/v1/post/${id}`);
 
         dispatch({
             type: 'likeSuccess',
@@ -27,7 +27,7 @@ export const addCommentOnPost = (id, comment) => async (dispatch) => {
             type: 'addCommentRequest'
         });
 
-        const { data } = await axios.put(`/api/v1/post/comment/${id}`, {
+        const { data } = await axios.put(`${process.env.REACT_APP_URL}/api/v1/post/comment/${id}`, {
             comment
         }, {
             headers: {
@@ -52,7 +52,7 @@ export const deleteCommentOnPost = (id, commentId) => async (dispatch) => {
             type: 'deleteCommentRequest'
         });
 
-        const { data } = await axios.delete(`/api/v1/post/comment/${id}`, {
+        const { data } = await axios.delete(`${process.env.REACT_APP_URL}/api/v1/post/comment/${id}`, {
             data: { commentId }
         });
 
@@ -74,7 +74,7 @@ export const createNewPost = (caption, image) => async (dispatch) => {
             type: 'newPostRequest'
         });
 
-        const { data } = await axios.post(`/api/v1/post/upload`, {
+        const { data } = await axios.post(`${process.env.REACT_APP_URL}/api/v1/post/upload`, {
             caption,
             image
         }, {
@@ -101,7 +101,7 @@ export const updatePost = (caption, id) => async (dispatch) => {
             type: 'updateCaptionRequest'
         });
 
-        const { data } = await axios.put(`/api/v1/post/${id}`, {
+        const { data } = await axios.put(`${process.env.REACT_APP_URL}/api/v1/post/${id}`, {
             caption
         }, {
             header: {
@@ -126,7 +126,7 @@ export const deletePost = (id) => async (dispatch) => {
             type: 'deletePostRequest'
         });
 
-        const { data } = await axios.delete(`/api/v1/post/${id}`);
+        const { data } = await axios.delete(`${process.env.REACT_APP_URL}/api/v1/post/${id}`);
 
         dispatch({
             type: 'deletePostSuccess',
